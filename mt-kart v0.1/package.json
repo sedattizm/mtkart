@@ -1,0 +1,15 @@
+{
+  "name": "mtkart-astro",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "prebuild": "node scripts/fingerprint.mjs",
+    "test": "node tests/performance.cjs"
+  },
+  "dependencies": {
+    "astro": "^5.16.0"
+  }
+}

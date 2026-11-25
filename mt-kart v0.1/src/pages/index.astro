@@ -1,0 +1,221 @@
+---
+import venues from "../data/venues.json";
+import {renderVenues} from "../lib/render-venues.mjs";
+---
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MT Kart | Mühendislik Topluluğu</title>
+<meta name="description" content="MT Kart ile anlaşmalı kafe, restoran, güzellik merkezi ve daha fazlasında MT Kart indirimlerinden yararlan. Kartı nereden alacağını ve indirimli mekânları gör.">
+<meta name="theme-color" content="#0a2a5e">
+<meta property="og:title" content="MT Kart | Mühendislik Topluluğu">
+<meta property="og:description" content="Anlaşmalı işletmelerde avantaj, tek kartta. Bu yıl herkese açık.">
+<meta property="og:type" content="website">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/site-d43bc7f837.css"></head>
+<body>
+<a class="skip" href="#mekanlar">İçeriğe geç</a>
+
+<!-- Açılış animasyonu: tek tam 3D tur, 2,9 saniyelik dolum; her sayfa yüklemesinde oynar. -->
+<header class="nav">
+  <div class="wrap">
+    <a href="/" aria-label="Mühendislik Topluluğu ana sayfa"><img src="/assets/image-23f92c533258.webp" alt="Mühendislik Topluluğu" width="84" height="42"></a>
+    <nav class="nav-links" aria-label="Sayfa menüsü">
+      <a class="hide-m" href="#nasil">Nasıl çalışır?</a>
+      <a class="hide-m" href="#al">Kartı al</a>
+      <a class="pill" href="#mekanlar">Mekânlar</a>
+    </nav>
+    <button type="button" id="mtThemeToggle" class="mt-theme-toggle" aria-label="Karanlık temayı aç" aria-pressed="false">☾ Koyu</button>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow"><i></i> 2026–2027 · Bu yıl herkese açık</span>
+      <h1>Kampüs çevresinde her hesapta <em>indirim.</em></h1>
+      <p class="lead">MT Kart ile anlaşmalı kafe, restoran, güzellik merkezi ve daha fazlasında MT Kart indirimlerinden yararlan. Ödemeden önce kartı göster, gerisi tamam.</p>
+      <div class="hero-benefits" aria-label="Kart avantajları"><span>Anlaşmalı işletmeler</span><span>Kolay kullanım</span><span>Bu yıl herkese açık</span></div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#al">Kartını al</a>
+        <a class="btn btn-ghost" href="#mekanlar">İndirimli mekânlar</a>
+      </div>
+    </div>
+    <div class="stage-wrap">
+      <div class="stage" id="stage">
+        <div class="float">
+          <div class="card3d" id="card" aria-label="MT Kart">
+            <div class="face"><img src="/assets/image-97d85c581d29.webp" alt="MT Kart ön yüz" width="640" height="984"></div>
+            <div class="face back"><img src="/assets/image-664553f94d82.webp" alt="MT Kart arka yüz" width="640" height="984"></div>
+          </div>
+        </div>
+      </div>
+      <button class="flip-btn" id="flip" type="button" aria-pressed="false"><span aria-hidden="true">↻</span> <span id="flipText">Arka yüzü gör</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RAKAMLAR ===== -->
+<div class="facts">
+  <div class="wrap">
+    <ul >
+      <li><b id="statCount">42</b><span>anlaşmalı mekân</span></li>
+      <li><b id="statRange">%10–25</b><span>indirim aralığı</span></li>
+      <li><b>200 TL</b><span>kart ücreti</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== MEKÂNLAR ===== -->
+<section id="mekanlar">
+  <div class="wrap">
+    <div >
+      <p class="kicker">Anlaşmalı işletmeler</p>
+      <h2>İndirimli mekânlar</h2>
+      <p class="sub">MT Kart avantajlarını keşfet. İşletme, kategori ve bölgeye göre sana uygun fırsatları bul.</p>
+      <div class="venue-highlights"><span><strong id="totalVenues">42</strong> anlaşmalı işletme</span><span><strong id="maxDiscount">—</strong> en yüksek indirim</span><span><strong>MT Kart</strong> ile avantaj</span></div>
+    </div>
+
+    <section class="mt-nearby" aria-labelledby="mtNearbyTitle">
+<h3 id="mtNearbyTitle">📍 Yakınımdaki anlaşmalı işletmeler</h3>
+<p>Konum izni vererek anlaşmalı şubeleri kuş uçuşu mesafeye göre gör veya aşağıdan bir şube seç.</p>
+<div class="mt-nearby-actions"><button type="button" id="mtLocate">Konumumu kullan</button></div><p id="mtLocationStatus" role="status">Konumun yalnızca bu sayfada kullanılır; siteye kaydedilmez.</p><div id="mtNearResults"></div><label for="mtMapVenue">Anlaşmalı işletme</label><select id="mtMapVenue"></select>
+<div class="mt-nearby-actions"><a id="mtNearbyOpen" target="_blank" rel="noopener noreferrer">Seçili işletmeyi haritada ara ↗</a></div>
+</section>
+    <div class="toolbar">
+      <label class="search">
+        <span class="sr" style="position:absolute;left:-999px">Mekân ara</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Mekân ara (kahve, döner…)" autocomplete="off">
+      </label>
+      <div class="chips" id="chips" role="group" aria-label="Kategori"></div><button type="button" id="favoritesOnly" class="mt-fav-filter" aria-pressed="false">♡ Favorilerim (<span id="favoritesCount">0</span>)</button>
+      <div class="selects">
+        <div class="grp">
+          <label><span class="sr" style="position:absolute;left:-999px">Bölge</span>
+            <select id="region" aria-label="Bölge"></select></label>
+          <label><span class="sr" style="position:absolute;left:-999px">Sıralama</span>
+            <select id="sort" aria-label="Sıralama">
+              <option value="oran">En yüksek indirim</option>
+              <option value="az">A–Z</option>
+            </select></label>
+        </div>
+        <div class="venue-results"><span class="count" id="count" aria-live="polite"></span><button type="button" id="resetFilters" class="reset-filters">Filtreleri temizle ↺</button></div>
+      </div>
+    </div>
+
+<div class="grid" id="grid"><Fragment set:html={renderVenues(venues)} /></div>
+<div class="empty" id="empty"><b>Sonuç bulunamadı</b>Aramayı ya da filtreleri değiştirmeyi dene.</div>
+<details class="mt-tools"><summary>Hesaplayıcı ve tasarruf araçları</summary>    <div class="calc-panel" id="discountCalculator" aria-labelledby="calcTitle">
+<h3 id="calcTitle">💰 MT Kart indirim hesaplayıcı</h3>
+<p>İşletmeni ve alışveriş tutarını seç; tahmini indirimini gör.</p>
+<div class="calc-controls">
+<label for="calcVenue">Anlaşmalı işletme<select id="calcVenue"></select></label>
+<label for="calcAmount">Alışveriş tutarı (₺)<input id="calcAmount" type="number" min="0" step="0.01" inputmode="decimal" value="250"></label>
+</div>
+<div class="calc-results" aria-live="polite">
+<div><small>İndirimsiz tutar</small><strong id="calcOriginal">—</strong></div>
+<div><small>Tahmini tasarruf</small><strong id="calcSaved">—</strong></div>
+<div><small>İndirimli tutar</small><strong id="calcFinal">—</strong></div>
+</div>
+<p class="calc-note" id="calcNote">Hesaplama yalnızca yüzdelik indirimler için geçerlidir. İşletmenin indirim koşullarını ödeme öncesi doğrulayın.</p>
+</div>
+
+<section class="mt-savings" id="mtSavings" aria-labelledby="mtSavingsTitle">
+<h3 id="mtSavingsTitle">📊 Tasarruf takibim</h3><p>MT Kart ile yaptığın alışverişleri kaydet; toplam tahmini tasarrufunu gör.</p>
+<form id="mtSavingsForm" class="mt-savings-form">
+<label>İşletme<select id="mtSavingsVenue" required></select></label>
+<label>Alışveriş tutarı (₺)<input id="mtSavingsAmount" type="number" min="0.01" max="10000000" step="0.01" inputmode="decimal" required placeholder="250"></label>
+<label>Uygulanan indirim (%)<input id="mtSavingsRate" type="number" min="0" max="100" step="0.01" required></label>
+<button type="submit">+ Kaydet</button></form>
+<p class="mt-savings-status" id="mtSavingsStatus" role="status" aria-live="polite"></p>
+<div class="mt-savings-stats"><div><small>Toplam alışveriş</small><strong id="mtSavingsSpent">₺0</strong></div><div><small>Toplam tasarruf</small><strong id="mtSavingsSaved">₺0</strong></div><div><small>İşlem sayısı</small><strong id="mtSavingsCount">0</strong></div></div>
+<div class="mt-savings-list" id="mtSavingsList" aria-live="polite"></div>
+<p class="mt-savings-disclaimer">Kayıtlar yalnızca bu tarayıcıda saklanır, başka cihazlarla eşitlenmez. İndirim oranı işletmeye ve ürüne göre değişebilir; gerçek fiş tutarını esas al.</p>
+</section>
+</details>
+
+  </div>
+</section>
+
+<!-- ===== NASIL ÇALIŞIR ===== -->
+<section id="nasil">
+  <div class="wrap">
+    <div >
+      <p class="kicker">Nasıl çalışır?</p>
+      <h2>Üç adımda indirim</h2>
+      <p class="sub">Karmaşık bir şey yok. Kartı al, mekânı seç, hesap öderken göster.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Kartını al</h3><p>Online ön sipariş formunu doldurarak 200 TL karşılığında MT Kart’ını edin.</p></div>
+      <div class="step"><h3>Mekânı seç</h3><p>Aşağıdaki listeden indirim oranına ve şubeye bak. Arama ve filtreler işini kolaylaştırır.</p></div>
+      <div class="step"><h3>Kartı göster</h3><p>Alışverişten önce kartını göstermen yeterli, indirim hesaba yansır.</p></div>
+    </div>
+    <p class="note">💡 Bazı mekânlarda “paket gıda hariç” ya da “menülerde geçerli” gibi şartlar var. Kartında ve listede yazan şarta göre sipariş vermeden önce kontrol et.</p>
+  </div>
+</section>
+
+<!-- ===== KARTI AL ===== -->
+<section id="al">
+  <div class="wrap">
+    <div >
+      <p class="kicker">Kartı nereden alırım?</p>
+      <h2>MT Kart için online ön sipariş ver</h2>
+    </div>
+    <div class="get">
+      <div class="price">
+        <div>
+          <small>MT Kart · Bu yıl herkese açık</small>
+          <strong>200 TL</strong>
+          <p>Mühendislik Topluluğu’nun 2026–2027 dönemi avantaj kartı. Bu yıl üyelik veya öğrencilik şartı olmadan herkes alabilir.</p>
+        </div>
+        <a class="btn btn-primary" href="https://forms.gle/XJFTZKz3KGiMrNBU9" target="_blank" rel="noopener">Online formu doldur</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="disc">İndirim oranları ve şartlar zamanla değişebilir; en güncel liste bu sayfadadır. Alışverişten önce kartını göstermeyi unutma.</p>
+    <a class="ig" href="https://instagram.com/gaunengineering" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      @gaunengineering</a>
+  </div>
+</footer>
+
+
+
+<dialog id="mtVenueDialog" class="mt-dialog" aria-labelledby="mtDialogName">
+<div class="mt-dialog-box">
+<button class="mt-dialog-close" id="mtDialogClose" type="button" aria-label="Pencereyi kapat">×</button>
+<div class="mt-dialog-eyebrow" id="mtDialogCategory"></div>
+<h2 id="mtDialogName"></h2>
+<div class="mt-dialog-discount"><strong id="mtDialogDiscount"></strong><span>MT Kart avantajı</span></div>
+<div class="mt-dialog-row"><b>İndirim koşulları</b><p id="mtDialogConditions"></p></div>
+<div class="mt-dialog-row"><b>Listelenen bölgeler</b><p id="mtDialogLocation"></p></div>
+<div class="mt-dialog-actions"><a id="mtDialogMaps" target="_blank" rel="noopener noreferrer">📍 Haritada ara</a><button type="button" id="mtDialogDone">Kapat</button></div>
+<p class="mt-dialog-note">Harita, tabloda verilen konumla açılır. Gitmeden önce şube ve indirim koşullarını doğrulayın.</p>
+</div></dialog>
+
+
+
+
+
+<script is:inline src="/assets/runtime-9eb80112d3.js" defer></script></body>
+</html>

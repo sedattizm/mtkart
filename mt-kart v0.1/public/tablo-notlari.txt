@@ -1,0 +1,9 @@
+MT Kart güncel tablo
+
+51 şube kaydı; 46 aktif, 5 pasif. Güncel tablodaki işletme, şube, kategori, oran, koşul ve aktif bilgileri korunmuştur. Tamamen boş test satırı çıkarılmıştır.
+
+gorsel_url sütunu eklendi. Fotoğraflar için doğrudan HTTPS WebP/AVIF dosya bağlantısı girin. Hücre boşsa fotoğraf görünmez.
+
+Koordinatlar, önceki kullanıcı dosyasında aynı kayıt kimliği ve aynı rakam dizisiyle bulunan değerler üzerinden onarıldı. Harita üzerinden konum doğrulaması yapılmadı. Excel dosyasında koordinat hücreleri düz metindir. CSV kullanırsanız içe aktarırken metinleri sayı/tarih/formüle dönüştürmeyi kapatın.
+
+Canlı Google Sheet doğrudan değiştirilmedi. Önce mevcut tablonuzun bir kopyasını alın. Hazır dosyayı aynı e-tabloya Dosya > İçe aktar > Yükle yolundan yükleyebilirsiniz. Mevcut işletmeler sekmesini değiştirme seçeneğini kullanın; yeni bir e-tabloya geçerseniz site bağlantısı ayrıca güncellenmelidir. Site yeni e-tablonun ilk sekmesini okur. İşletme tablosunu ilk sekmede tutun.
